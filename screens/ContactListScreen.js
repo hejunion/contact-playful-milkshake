@@ -21,7 +21,11 @@ export default class ContactListScreen extends React.Component {
   static navigationOptions = ({navigation}) => {
     return {
       headerTitle: 'List of Contacts',
-      headerRight: <Button title='Add..' ></Button>
+      headerRight: <Button title='Add..' onPress={ ()=>{
+        navigation.navigate('AddContact', {
+          'callFrom': 'Contact List Screen'
+        })
+      } }></Button>
     }
   }
 
@@ -79,7 +83,15 @@ export default class ContactListScreen extends React.Component {
         {
 
           this.state.showContacts && (
-          <ContactList contacts={this.state.contacts}></ContactList>
+          <ContactList contacts={this.state.contacts}
+              onSelectContact ={ ( contact )=>{
+                 console.log('Going to detail')
+                 this.props.navigation.navigate('ContactDetail', {
+                    name: contact.name
+                 })
+
+              }}
+          ></ContactList>
           )
 
         }

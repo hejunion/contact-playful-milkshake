@@ -16,6 +16,7 @@ import all_contacts, { compareNames } from './contacts.js';
 
 
 import AddContactScreen from './screens/AddContactScreen.js';
+import ContactDetailScreen from './screens/ContactDetailScreen.js';
 import ContactListScreen from './screens/ContactListScreen';
 
 // or any pure javascript modules available in npm
@@ -23,6 +24,7 @@ import ContactListScreen from './screens/ContactListScreen';
 const AppNavigator = createStackNavigator ( {
   AddContact : AddContactScreen,
   ContactList : ContactListScreen,
+  ContactDetail: ContactDetailScreen,
 }, {
     initialRouteName: 'ContactList',
 })

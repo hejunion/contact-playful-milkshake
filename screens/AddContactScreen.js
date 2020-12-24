@@ -4,7 +4,7 @@ import AddContactForm  from '../components/AddContactForm.js'
 export default class AddContactScreen extends React.Component {
 
     static navigationOptions = {
-        headTitle: 'Add New Contact'
+        headerTitle: 'Add New Contact'
     }
 
     handleSubmit = formState => {
