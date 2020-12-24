@@ -18,6 +18,13 @@ import ContactList from './SectionContactList.js'
 // or any pure javascript modules available in npm
 
 export default class ContactListScreen extends React.Component {
+  static navigationOptions = ({navigation}) => {
+    return {
+      headerTitle: 'List of Contacts',
+      headerRight: <Button title='Add..' ></Button>
+    }
+  }
+
   //State
   state = {
     showContacts: true,
@@ -54,7 +61,9 @@ export default class ContactListScreen extends React.Component {
 
 
   showAddScreen = () => {
-     this.props.navigation.navigate('AddContact')
+     this.props.navigation.navigate('AddContact', {
+       'callFrom': 'Contact List Screen'
+     })
   }
   // Render
 

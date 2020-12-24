@@ -13,14 +13,14 @@ export default class AddContactForm extends React.Component {
     phone: '',
     isFormValid:false,
   };
- 
+
   componentDidUpdate(prevProps, prevState) {
     if (this.state.name !== prevState.name || this.state.phone !== prevState.phone) {
       this.validateForm()
     }
   }
 
-  
+
 
   validateForm= () => {
     console.log('valding')
@@ -45,11 +45,15 @@ export default class AddContactForm extends React.Component {
   handlePhoneChange = (phone) => {
     this.setState({ phone: phone});
     this.validateForm()
-  }; 
+  };
   */
 
   handleSubmit = () => {
     this.props.onSubmit( {name: this.state.name, phone: this.state.phone})
+  }
+
+  handleGoBack = () => {
+    this.props.handleGoBack()
   }
 
   render() {
@@ -65,6 +69,7 @@ export default class AddContactForm extends React.Component {
           onChangeText={this.handlePhoneChange}
           keyboardType="numberic"></TextInput>
         <Button title="Submit" onPress={this.handleSubmit} disabled={!this.state.isFormValid} ></Button>
+        <Button title="Go Back" onPress={ this.handleGoBack } ></Button>
       </View>
     );
   }

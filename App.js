@@ -9,7 +9,7 @@ import {
   SectionList,
 } from 'react-native';
 
-import {createAppContainer,createSwitchNavigator} from 'react-navigation';
+import {createStackNavigator} from 'react-navigation';
 
 import all_contacts, { compareNames } from './contacts.js';
 
@@ -20,7 +20,7 @@ import ContactListScreen from './screens/ContactListScreen';
 
 // or any pure javascript modules available in npm
 
-const AppNavigator = createSwitchNavigator ( {
+const AppNavigator = createStackNavigator ( {
   AddContact : AddContactScreen,
   ContactList : ContactListScreen,
 }, {
