@@ -1,5 +1,22 @@
 
+# Quick Start
+
+    npm install exp-cli
+
+    git clone https://github.com/hejunion/contact-playful-milkshake.git
+
+    cd contact-playful-milkshake
+
+    expo start
+
+
 # History in developing
+    main branch  -- merging all to this master
+    1.0.0-sectionlist
+    1.0.1-navigation -- active developing
+        1.0.2-stacknavigation  Implementing Navigation
+        1.0.2-tag-contactdetails  Implementing Contact Details
+
 
 
 
