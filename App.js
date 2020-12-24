@@ -9,7 +9,7 @@ import {
   SectionList,
 } from 'react-native';
 
-import {createStackNavigator} from 'react-navigation';
+import {createSwitchNavigator, createStackNavigator, createBottomTabNavigator } from 'react-navigation';
 
 import all_contacts, { compareNames } from './contacts.js';
 
@@ -19,15 +19,57 @@ import AddContactScreen from './screens/AddContactScreen.js';
 import ContactDetailScreen from './screens/ContactDetailScreen.js';
 import ContactListScreen from './screens/ContactListScreen';
 
+
+import LoginScreen from './screens/LoginScreen.js'
+import SettingsScreen from './screens/SettingsScreen.js'
 // or any pure javascript modules available in npm
 
-const AppNavigator = createStackNavigator ( {
+import Ionicons from 'react-native-vector-icons/Ionicons'
+
+const ContactNavigator = createStackNavigator ( {
   AddContact : AddContactScreen,
   ContactList : ContactListScreen,
   ContactDetail: ContactDetailScreen,
+
 }, {
     initialRouteName: 'ContactList',
 })
+
+ContactNavigator.navigationOptions = {
+    tabBarIcon: ({focused, tintColor}) => (
+        <Ionicons
+          name={`ios-contacts${focused?'':'-outline'}`}
+          size={25}
+          color={tintColor}
+        ></Ionicons>
+    )
+}
+
+
+
+const MainNavigator = createBottomTabNavigator(
+   {
+    ContactTab: ContactNavigator,
+    SettingTab: SettingsScreen,
+
+   },
+   {
+     tabBarOptions: {
+       activeTintColor: "#a41034",
+       activeTabColor: "#a61034"
+     }
+   }
+)
+
+
+const AppNavigator = createSwitchNavigator (
+  {
+     main: MainNavigator,
+     login: LoginScreen,
+  }, {
+    initialRouteName: 'login',
+  }
+)
 
 
 export default class App extends React.Component {

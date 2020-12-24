@@ -21,10 +21,13 @@ export default class ContactListScreen extends React.Component {
   static navigationOptions = ({navigation}) => {
     return {
       headerTitle: 'List of Contacts',
-      headerRight: <Button title='Add..' onPress={ ()=>{
+      headerRight: <Button title='Add' onPress={ ()=>{
+
         navigation.navigate('AddContact', {
           'callFrom': 'Contact List Screen'
         })
+
+
       } }></Button>
     }
   }
