@@ -22,6 +22,9 @@ import ContactListScreen from './screens/ContactListScreen';
 
 import LoginScreen from './screens/LoginScreen.js'
 import SettingsScreen from './screens/SettingsScreen.js'
+
+
+import { loadContact } from './api'
 // or any pure javascript modules available in npm
 
 import Ionicons from 'react-native-vector-icons/Ionicons'
@@ -75,9 +78,22 @@ const AppNavigator = createSwitchNavigator (
 export default class App extends React.Component {
   //State
   state = {
-    contacts: all_contacts,
+    contacts: null,
   };
 
+
+  getUser = async () => {
+    try{
+    const result = await loadContact();
+    this.setState({contacts: result})
+    } catch(err) {
+      console.error(err);
+    }
+  }
+
+  componentDidMount() {
+     this.getUser();
+  }
 
 
   sort = () => {
