@@ -1,5 +1,7 @@
 import React from 'react'
 import AddContactForm  from '../components/AddContactForm.js'
+import store from '../redux/store'
+import {addContact} from '../redux/actions'
 
 export default class AddContactScreen extends React.Component {
 
@@ -8,7 +10,8 @@ export default class AddContactScreen extends React.Component {
     }
 
     handleSubmit = formState => {
-        this.props.screenProps.addContact(formState);
+        //this.props.screenProps.addContact(formState);
+        store.dispatch(addContact(formState))
         this.props.navigation.navigate('ContactList')
     }
 

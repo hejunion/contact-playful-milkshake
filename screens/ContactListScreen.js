@@ -13,6 +13,7 @@ import {
 import Row from './Row.js';
 import ContactList from './SectionContactList.js'
 
+import store from '../redux/store'
 // You can import from local files
 
 // or any pure javascript modules available in npm
@@ -35,7 +36,7 @@ export default class ContactListScreen extends React.Component {
   //State
   state = {
     showContacts: true,
-    contacts: this.props.screenProps.contacts,
+    contacts: store.getState().contacts,
   };
 
   // Variable of function
@@ -63,7 +64,7 @@ export default class ContactListScreen extends React.Component {
 
   addContact = newContact => {
      console.log('Add...' + newContact)
-    this.setState( preState=> ( { showAddForm: false, contacts: [ ...preState.contacts, newContact ]}))
+     this.setState( preState=> ( { showAddForm: false, contacts: [ ...preState.contacts, newContact ]}))
   }
 
 
@@ -77,6 +78,7 @@ export default class ContactListScreen extends React.Component {
 
   render() {
 
+    const contacts = store.getState().contacts
 
     return (
       <View style={styles.container}>
@@ -86,7 +88,7 @@ export default class ContactListScreen extends React.Component {
         {
 
           this.state.showContacts && (
-          <ContactList contacts={this.state.contacts}
+          <ContactList contacts={contacts}
               onSelectContact ={ ( contact )=>{
                  console.log('Going to detail')
                  this.props.navigation.navigate('ContactDetail', {

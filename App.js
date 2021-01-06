@@ -113,10 +113,13 @@ export default class App extends React.Component {
 
 
     return (
+      <AppNavigator/>
+      /*
         <AppNavigator screenProps={ {
           contacts: this.state.contacts,
           addContact: this.addContact,
         }}></AppNavigator>
+      */
     );
   }
 }
