@@ -18,7 +18,11 @@
     "react-native-vector-icons": "^7.1.0",
     "react-native-web": "~0.13.12",
     "react-navigate": "^0.6.0",
-    "react-navigation": "2.0.0-beta.5"
+    "react-navigation": "2.0.0-beta.5",
+    "react-redux": "^5.0.7",
+    "redux": "^3.7.2",
+    "redux-persist": "^5.9.1",
+    "redux-thunk": "^2.2.0"
   },
   "devDependencies": {
     "@babel/core": "~7.9.0"

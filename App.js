@@ -25,6 +25,10 @@ import SettingsScreen from './screens/SettingsScreen.js'
 
 
 import { loadContact } from './api'
+
+import store from './redux/store'
+import {Provider} from 'react-redux'
+
 // or any pure javascript modules available in npm
 
 import Ionicons from 'react-native-vector-icons/Ionicons'
@@ -113,7 +117,9 @@ export default class App extends React.Component {
 
 
     return (
+      <Provider store={store}>
       <AppNavigator/>
+      </Provider>
       /*
         <AppNavigator screenProps={ {
           contacts: this.state.contacts,

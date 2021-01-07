@@ -13,12 +13,12 @@ import {
 import Row from './Row.js';
 import ContactList from './SectionContactList.js'
 
-import store from '../redux/store'
+//import store from '../redux/store'
+import {connect} from 'react-redux'
 // You can import from local files
 
 // or any pure javascript modules available in npm
-
-export default class ContactListScreen extends React.Component {
+ class ContactListScreen extends React.Component {
   static navigationOptions = ({navigation}) => {
     return {
       headerTitle: 'List of Contacts',
@@ -36,14 +36,12 @@ export default class ContactListScreen extends React.Component {
   //State
   state = {
     showContacts: true,
-    contacts: store.getState().contacts,
   };
 
   // Variable of function
   toggleContacts = () => {
     this.setState((preState) => ({
       showContacts: !preState.showContacts,
-      contacts: preState.contacts,
     }));
     //console.log( this.state.contacts)
   };
@@ -62,12 +60,13 @@ export default class ContactListScreen extends React.Component {
   };
 */
 
+/*
   addContact = newContact => {
      console.log('Add...' + newContact)
      this.setState( preState=> ( { showAddForm: false, contacts: [ ...preState.contacts, newContact ]}))
   }
 
-
+*/
   showAddScreen = () => {
      this.props.navigation.navigate('AddContact', {
        'callFrom': 'Contact List Screen'
@@ -78,7 +77,6 @@ export default class ContactListScreen extends React.Component {
 
   render() {
 
-    const contacts = store.getState().contacts
 
     return (
       <View style={styles.container}>
@@ -88,7 +86,7 @@ export default class ContactListScreen extends React.Component {
         {
 
           this.state.showContacts && (
-          <ContactList contacts={contacts}
+          <ContactList contacts={this.props.contacts}
               onSelectContact ={ ( contact )=>{
                  console.log('Going to detail')
                  this.props.navigation.navigate('ContactDetail', {
@@ -111,3 +109,10 @@ const styles = StyleSheet.create({
     paddingTop: 5,
   },
 });
+
+
+const mapStateToProps = state=> (
+  {
+    contacts: state.contacts
+  })
+export default connect( mapStateToProps) ( ContactListScreen)
