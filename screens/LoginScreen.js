@@ -1,7 +1,8 @@
 
 import React from 'react'
-
-
+import { connect } from 'react-redux'
+import { logInUser} from '../redux/actions'
+import {PropTypes} from 'prop-types'
 import {
     Text,
     View,
@@ -15,7 +16,14 @@ import {
 
 import {login} from '../api'
 
-export default class LoginScreen extends React.Component {
+class LoginScreen extends React.Component {
+
+    static propTypes = {
+        err: PropTypes.string,
+        token: PropTypes.string,
+        logInUser: PropTypes.func
+    }
+
     static navigationOptions = ( (navigation)=>
     {
         return {
@@ -42,7 +50,7 @@ export default class LoginScreen extends React.Component {
         return (
             <View style={styles.container}>
                 <Text style={styles.text}>Please login</Text>
-                <Text>{this.state.err}</Text>
+                <Text>{this.props.err}</Text>
                 <TextInput placeholder="username" value={this.state.usernmae} onChangeText={this.updateUsername} autoCapitalize='none'/>
                 <TextInput placeholder="password" value={this.state.password} onChangeText={ this.updatePassword } autoCapitalize='none' secureTextEntry='true' />
 
@@ -53,14 +61,27 @@ export default class LoginScreen extends React.Component {
     }
 
 
+
     _login =async ()=> {
+
+        // Using function in dispatch
+        this.props.logInUser(this.state.username , this.state.password)
+
+        /*
         try{
         const status = await login(this.state.username, this.state.password);
         if ( status) this.props.navigation.navigate('main')
         }catch(err) {
             console.error( err.message )
             this.setState({err: err.message})
+        }*/
+    }
+
+    componentWillReceiveProps(newProps){
+        if ( newProps.token){
+            this.props.navigation.navigate('main')
         }
+
     }
 }
 
@@ -76,3 +97,12 @@ const styles = StyleSheet.create(
 
     }
 )
+
+const mapStateToProps = state => (
+    {
+        err: state.user.loginErr,
+        token: state.user.token
+    }
+)
+
+export default connect(mapStateToProps, {logInUser})(LoginScreen)

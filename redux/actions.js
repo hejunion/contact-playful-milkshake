@@ -1,6 +1,14 @@
+import {login} from '../api'
+
 // action types
 export const UPDATE_USER = 'UPDATE_USER'
 export const UPDATE_CONTACT = 'UPDATE_CONTACT'
+
+export const LOG_IN_SENT = 'LOG_IN_SENT'
+
+export const LOG_IN_FULLFILLED = 'LOG_IN_FULLFILLED'
+export const LOG_IN_RJECTED = 'LOG_IN_RJECTED'
+
 
 // action creators
 export const updateUser = update => ({
@@ -12,3 +20,15 @@ export const addContact = newContact => ({
   type: UPDATE_CONTACT,
   payload: newContact,
 })
+
+
+// async action creator
+export const logInUser = (username, password) => async dispatch => {
+  dispatch({type: LOG_IN_SENT})
+  try {
+    const token = await login(username, password)
+    dispatch({type: LOG_IN_FULLFILLED, payload: token})
+  } catch (err) {
+    dispatch({type: LOG_IN_RJECTED, payload: err.message})
+  }
+}
