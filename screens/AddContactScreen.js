@@ -1,9 +1,10 @@
 import React from 'react'
 import AddContactForm  from '../components/AddContactForm.js'
-import store from '../redux/store'
+//import {store} from '../redux/store'
+import {connect} from 'react-redux'
 import {addContact} from '../redux/actions'
 
-export default class AddContactScreen extends React.Component {
+ class AddContactScreen extends React.Component {
 
     static navigationOptions = {
         headerTitle: 'Add New Contact'
@@ -11,7 +12,7 @@ export default class AddContactScreen extends React.Component {
 
     handleSubmit = formState => {
         //this.props.screenProps.addContact(formState);
-        store.dispatch(addContact(formState))
+        this.props.addContact(formState)
         this.props.navigation.navigate('ContactList')
     }
 
@@ -28,3 +29,5 @@ export default class AddContactScreen extends React.Component {
         return <AddContactForm onSubmit={this.handleSubmit} handleGoBack ={this.handleGoBack} ></AddContactForm>
     }
 }
+
+export default connect(null, {addContact: addContact}) ( AddContactScreen)
